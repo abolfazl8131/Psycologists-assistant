@@ -9,7 +9,7 @@ MAX_SEQ = 2048
 ds = load_dataset("heliosbrahma/mental_health_chatbot_dataset", split='train')
 
 
-model, tokenizer = FastLanguageModel.from_pretrained(model_name = "unsloth/tinyllama-bnb-4bit",
+model,tokenizer = FastLanguageModel.from_pretrained(model_name = "unsloth/tinyllama-bnb-4bit",
                                                      max_seq_length = MAX_SEQ, 
                                                      dtype=None, 
                                                      load_in_4bit=True)
@@ -38,8 +38,8 @@ trainer = SFTTrainer(
     args = TrainingArguments(
         per_device_train_batch_size = 2,
         gradient_accumulation_steps = 4,
-        warmup_steps = 10,
-        max_steps = 60,
+        warmup_steps = 1,
+        max_steps = 2,
         fp16 = not torch.cuda.is_bf16_supported(),
         bf16 = torch.cuda.is_bf16_supported(),
         logging_steps = 1,
@@ -50,6 +50,5 @@ trainer = SFTTrainer(
 )
 trainer.train()
 
-model.save_pretrained("psyco_assistant")
-
-tokenizer.save_pretrained("psyco_assistant")
+model.push_to_hub("psyco_assistant")
+tokenizer.push_to_hub("psyco_assistant")
