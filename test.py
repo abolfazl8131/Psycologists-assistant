@@ -14,7 +14,7 @@ model = AutoModelForCausalLM.from_pretrained("./psyco_assistant")
 tokenizer = AutoTokenizer.from_pretrained("./psyco_assistant")
 inputs = tokenizer(
     [
-      "what is mental illness in psycology?"
+      "<HUMAN>: what is mental illness in psycology?"
     ],
     return_tensors="pt",
 
