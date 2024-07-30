@@ -1,9 +1,10 @@
 import torch
 from unsloth import FastLanguageModel
-from trl import SFTTrainer,DataCollatorForCompletionOnlyLM
+from trl import SFTTrainer
 from transformers import TrainingArguments
 from datasets import load_dataset
 import mlflow
+import os
 
 def fine_tune_llm(max_seq = 2048,load_in_4bit=True,warmup_steps=3,max_steps=10):
 
@@ -33,8 +34,8 @@ def fine_tune_llm(max_seq = 2048,load_in_4bit=True,warmup_steps=3,max_steps=10):
         loftq_config=None,
     )
 
-    mlflow.set_experiment("MLflow PEFT Tutorial")
-    mlflow.set_tracking_uri("http://127.0.0.1:8080")             
+    mlflow.set_experiment("Psyco assistant Expriment")
+    mlflow.set_tracking_uri(str(os.environ['HOST']))        
    
     trainer = SFTTrainer(
         model = model,
@@ -56,10 +57,14 @@ def fine_tune_llm(max_seq = 2048,load_in_4bit=True,warmup_steps=3,max_steps=10):
             seed = 3407,
         ),
     )
+    
 
     trainer.train()
+
+    model.save_pretrained('psyco_assistant')
+    tokenizer.save_pretrained('psyco_assistant')
     
 
 
-
-fine_tune_llm()
+if __name__ == '__main__':
+    fine_tune_llm()
