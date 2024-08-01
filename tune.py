@@ -35,7 +35,7 @@ def fine_tune_llm(max_seq = 2048,load_in_4bit=True,warmup_steps=3,max_steps=10):
     )
 
     mlflow.set_experiment("Psyco assistant Expriment")
-    mlflow.set_tracking_uri(str(os.environ['HOST']))        
+    mlflow.set_tracking_uri(str(os.environ.get('MLFLOW_TRACKING_URI')))        
    
     trainer = SFTTrainer(
         model = model,
@@ -67,4 +67,5 @@ def fine_tune_llm(max_seq = 2048,load_in_4bit=True,warmup_steps=3,max_steps=10):
 
 
 if __name__ == '__main__':
+    
     fine_tune_llm()
