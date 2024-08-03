@@ -1,0 +1,1 @@
+mlflow models serve --model-uri models:/pysco_tiny/Production -p 1234 --no-conda
