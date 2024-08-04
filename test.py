@@ -1,26 +1,15 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer
-import torch
-
-if torch.cuda.is_available():
-    device = torch.device("cuda")
-    print("Using GPU:", torch.cuda.get_device_name(0))
-else:
-    device = torch.device("cpu")
-    print("CUDA is not available. Using CPU.")
+import json
+import requests
 
 
+payload = {"inputs": ["<HUMAN>:what is mantal health?"]}
+
+print(payload)
+response = requests.post(
+    url=f"https://localhost:1234/invocations/",
+    json=payload,
+)
+
+
+print(response.text)
    
-model = AutoModelForCausalLM.from_pretrained("./psyco_assistant")
-tokenizer = AutoTokenizer.from_pretrained("./psyco_assistant")
-
-inputs = tokenizer(
-    [
-      "<HUMAN>: what is mental illness in psycology?"
-    ],
-    return_tensors="pt",
-
-).to("cuda")
-
-outputs = model.generate(**inputs, max_new_tokens=128)
-print(outputs)
-print(tokenizer.batch_decode(outputs))
