@@ -2,7 +2,7 @@ import mlflow
 from transformers import pipeline,AutoTokenizer
 import os
 
-mlflow.set_experiment("Psyco assistant Expriment")
+mlflow.set_experiment("Psyco assistant model registring process")
 mlflow.set_tracking_uri(str(os.environ.get('MLFLOW_TRACKING_URI')))  
 
 architecture = "psyco_assistant"
