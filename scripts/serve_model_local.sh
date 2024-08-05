@@ -1,1 +1,1 @@
-mlflow models serve --model-uri models:/psyco_tiny/Production -p 1234 --no-conda
+mlflow models serve --model-uri models:/psyco_tiny@sec -p 1235 --no-conda

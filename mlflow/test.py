@@ -2,12 +2,13 @@ import json
 import requests
 
 
-payload = {"inputs": ["<HUMAN>:what is mantal health?"]}
+payload = {"inputs": ["what is mantal health?"]}
 
 print(payload)
 response = requests.post(
-    url=f"https://localhost:1234/invocations/",
+    url=f"http://localhost:1235/invocations",
     json=payload,
+    
 )
 
 

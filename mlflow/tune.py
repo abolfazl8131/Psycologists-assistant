@@ -14,7 +14,7 @@ def fine_tune_llm(max_seq = 2048,load_in_4bit=True,warmup_steps=3,max_steps=10):
     ds = load_dataset("heliosbrahma/mental_health_chatbot_dataset", split='train')
 
     if os.path.isdir("psyco_assistant"):
-
+        
         model,tokenizer = FastLanguageModel.from_pretrained(model_name = "psyco_assistant",
                                                             max_seq_length = max_seq, 
                                                             dtype=None, 
