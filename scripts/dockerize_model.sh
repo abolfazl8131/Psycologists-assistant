@@ -1,1 +1,1 @@
-mlflow models build-docker -m models:/psyco_tiny/Production -n psyco_prod --enable-mlserver
+mlflow models build-docker -m models:/psyco_tiny@sec -n psyco_prod --enable-mlserver
